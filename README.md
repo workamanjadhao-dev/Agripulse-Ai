@@ -9,7 +9,10 @@
 
 > **Comprehensive Full-Stack Agricultural Decision-Support Platform**  
 > **Official Repository**: [https://github.com/workamanjadhao-dev/Agripulse-Ai](https://github.com/workamanjadhao-dev/Agripulse-Ai)  
+> **Live Web Application (Vercel)**: [https://agripulse-ai-wheat.vercel.app](https://agripulse-ai-wheat.vercel.app)  
+> **Live REST API (Render)**: [https://agripulse-ai-koxv.onrender.com](https://agripulse-ai-koxv.onrender.com)  
 > **System Architecture & Technical Reference Manual**
+
 
 ---
 
@@ -274,10 +277,11 @@ Navigate to `http://localhost:5173`.
 #### Pre-configured Demo Accounts:
 | Role | Email | Password | Primary Capabilities |
 | :--- | :--- | :--- | :--- |
-| **Farmer** | `farmer@demo.com` | `farmer123` | My Crops, Mandi Discovery, Hold vs Sell, AI Chatbot |
-| **Buyer / Trader** | `buyer@demo.com` | `buyer123` | Post Requirement, Direct Farmer Match, Wholesale Procurement |
-| **Transporter** | `transporter@demo.com` | `trans123` | Fleet Management, Rental Bookings, Route Dispatch |
-| **Administrator** | `admin@demo.com` | `admin123` | APMC Sync Controls, Health Telemetry, User & Resource Overview |
+| **Farmer** | `farmer@agripulse.in` | `farmer123` | My Crops, Mandi Discovery, Hold vs Sell, AI Chatbot |
+| **Buyer / Trader** | `trader@vidarbhaagro.com` | `buyer123` | Post Requirement, Direct Farmer Match, Wholesale Procurement |
+| **Fleet / Transporter** | `fleet@agripulse.in` | `owner123` | Fleet Management, Rental Bookings, Route Dispatch |
+| **Administrator** | `admin@agripulse.in` | `admin123` | APMC Sync Controls, Health Telemetry, User & Resource Overview |
+
 
 ---
 
