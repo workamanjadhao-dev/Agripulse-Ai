@@ -7,9 +7,9 @@
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-> **Final Year Project (Capstone / B.Tech / B.E. / MCA)**  
+> **Comprehensive Full-Stack Agricultural Decision-Support Platform**  
 > **Official Repository**: [https://github.com/workamanjadhao-dev/Agripulse-Ai](https://github.com/workamanjadhao-dev/Agripulse-Ai)  
-> **Comprehensive System Documentation & Viva-Defense Reference Manual**
+> **System Architecture & Technical Reference Manual**
 
 ---
 
@@ -71,7 +71,7 @@ Indian farmers face severe price volatility, middleman exploitation, lack of sto
 - **Endpoint**: `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070`
 - **Data Extracted**: Commodity, market name, district, state, modal price, min/max price, arrival quantity (quintals), arrival date.
 - **How it Works**: The backend service (`marketDataService.js`) polls or syncs data using the Government API key.
-- **Viva Defense Point (Fail-safe Grounding Engine)**: When the external government portal rate-limits or is offline, AgriPulse automatically activates its **deterministic agricultural simulation engine**. This engine computes live intraday price fluctuations based on Indian Standard Time (IST) trading sessions (Pre-Open sorting, Morning Discovery Auction, Peak Trading, Evening Clearance).
+- **Fail-safe Grounding Engine**: When the external government portal rate-limits or is offline, AgriPulse automatically activates its **deterministic agricultural simulation engine**. This engine computes live intraday price fluctuations based on Indian Standard Time (IST) trading sessions (Pre-Open sorting, Morning Discovery Auction, Peak Trading, Evening Clearance).
 
 #### 2. Google Gemini Generative AI API (`gemini-1.5-flash` / `gemini-2.0-flash`)
 - **Package**: `@google/generative-ai`
@@ -134,9 +134,9 @@ All internal endpoints are mounted under `http://localhost:5000/api` with full C
 - **Format**: SQLite 3 single-file relational database.
 - **Engine**: Node.js `sqlite3` driver wrapped in asynchronous Promise helpers (`dbRun`, `dbGet`, `dbAll`).
 - **Data Integrity**: Enforces `PRAGMA foreign_keys = ON;` on every connection. All transactions and relational cascades are enforced.
-- **Why SQLite for Viva**: 
-  1. **Zero configuration**: No local server installation (like MySQL/PostgreSQL service) is needed on the evaluator's computer.
-  2. **100% Portable**: The database file moves with the project code.
+- **Architectural Rationale for SQLite**: 
+  1. **Zero configuration**: No local daemon or server installation (like MySQL/PostgreSQL) required to get started immediately.
+  2. **100% Portable**: The database file moves with the project code for easy deployments and backups.
   3. **ACID Compliant**: Complete Atomicity, Consistency, Isolation, and Durability.
 
 ```
@@ -271,8 +271,8 @@ npm run dev
 ### Step 3: Open in Browser & Demo
 Navigate to `http://localhost:5173`.
 
-#### Pre-configured Demo Accounts for Instant Viva Presentation:
-| Role | Email | Password | What to Showcase |
+#### Pre-configured Demo Accounts:
+| Role | Email | Password | Primary Capabilities |
 | :--- | :--- | :--- | :--- |
 | **Farmer** | `farmer@demo.com` | `farmer123` | My Crops, Mandi Discovery, Hold vs Sell, AI Chatbot |
 | **Buyer / Trader** | `buyer@demo.com` | `buyer123` | Post Requirement, Direct Farmer Match, Wholesale Procurement |
@@ -281,80 +281,72 @@ Navigate to `http://localhost:5173`.
 
 ---
 
-## 🎯 7. Top 15 Viva Questions & Technical Answers (Viva Cheat Sheet)
+## 🌟 7. Core Feature Modules
 
-#### Q1: "Where is the data stored in your project?"
-> **Answer**:  
-> "All transactional and market data is persistently stored in a local relational database file named `database.sqlite` located inside the `/server` directory. It uses the `sqlite3` engine with enforced foreign key constraints (`PRAGMA foreign_keys = ON`). Session tokens are stored in the client's `localStorage`."
+### 1. 📊 Real-Time Mandi Price Discovery
+- Live modal, minimum, and maximum prices for 25+ essential Indian commodities.
+- Multi-filter search by crop name, mandi, district, and state.
+- 14-day interactive price and arrival volume trends rendered with Recharts.
+- Intraday simulated trading sessions aligned with Indian Standard Time (IST).
 
-#### Q2: "Why did you choose SQLite over MongoDB or MySQL?"
-> **Answer**:  
-> "First, agricultural data (crops, farmers, APMC prices, bookings) is inherently relational, requiring strict ACID compliance and foreign-key integrity. Second, SQLite is serverless and zero-configuration, meaning the complete database resides in a single portable binary file (`database.sqlite`) that runs identically on any demonstration machine without requiring a running background daemon or external database server."
+### 2. 🔮 Econometric Crop Price Forecasting & Decision Engine
+- 7, 15, and 30-day projection curves powered by quantitative harmonic price modeling.
+- Evaluates harvest arrival volume elasticity, seasonal factors, and moving averages.
+- **Hold vs. Sell Advisor**: Computes net profit after cold storage expense (₹80/quintal/month) and advises whether to sell immediately or store for future gain.
 
-#### Q3: "What external APIs does your application interact with?"
-> **Answer**:  
-> "Our application integrates three key external APIs:
-> 1. **Agmarknet / data.gov.in API** for official Indian government APMC commodity rates.
-> 2. **Open-Meteo API** for high-precision, real-time meteorological metrics and 14-day past rainfall.
-> 3. **Google Gemini Generative AI API** (`@google/generative-ai`) for multilingual AI agricultural advisory and natural language forecast reasoning.
-> 4. **OpenStreetMap Nominatim API** for reverse geocoding device coordinates."
+### 3. 🤝 Direct Farmer-Buyer Marketplace
+- Algorithmic matching between farmer crop listings and buyer procurement demand.
+- Match score based on commodity compatibility, required quantity, and price expectation.
+- Direct contact bridge to bypass commission agents and exploitative middlemen.
 
-#### Q4: "What happens if the internet goes down or the external government API is unavailable during demo?"
-> **Answer**:  
-> "The system was designed with an **Autonomous Fail-Safe Architecture**. If `data.gov.in` or Gemini fails or times out, the backend automatically switches to our built-in **Agricultural Grounding & Simulation Engine**. It deterministically computes APMC session dynamics based on Indian Standard Time (IST) and provides verified local agricultural advice so the application never breaks or displays an error screen."
+### 4. 🚜 Agri-Logistics & Farm Machinery Sharing
+- **Tractor & Harvester Rental**: Search and book nearby tractors and farming implements with transparent hourly/daily pricing.
+- **Cold Storage Finder**: Discover certified warehouses and cold storages by commodity, temperature range, and proximity.
+- **Transport Fleet Dispatch**: Agricultural vehicle booking with clear per-kilometer freight pricing.
 
-#### Q5: "How does the Crop Price Forecasting work? Is it pure AI?"
-> **Answer**:  
-> "It is a hybrid system. The base forecast is generated by a **Multi-Factor Econometric Engine** (`quantitativeForecastingEngine.js`) that analyzes historical 14-day price trends, seasonal crop harmonic curves, and arrival supply elasticity. This mathematical forecast is then fed into **Google Gemini**, which acts as a reasoning layer to generate natural-language explanations and risk factors for the farmer."
+### 5. 🌦️ Hyperlocal Weather & Agro-Advisories
+- High-precision live weather and 7-day forecast via Open-Meteo.
+- 14-day past rainfall monitoring.
+- Actionable rule-based farming advisories:
+  - **Irrigation Advice**: Pause watering when recent rain or precipitation probability is elevated.
+  - **Pest & Disease Alert**: Early warnings for fungal infections and bollworms based on temperature/humidity thresholds.
+  - **Pesticide Spray Window**: Alerts against spraying during high wind speeds or imminent rainfall.
 
-#### Q6: "How do you calculate the 'Hold vs. Sell' recommendation?"
-> **Answer**:  
-> "The decision engine compares the 15-day projected price increase against the estimated cost of cold storage (standard ₹80 per quintal per month, or ~₹40 for 15 days) and perishable crop risk. If the net expected profit after storage costs is greater than 5%, the system outputs a **HOLD** signal; otherwise, it outputs a **SELL NOW** recommendation."
+### 6. 🤖 Multilingual AI Crop Doctor
+- Conversational agricultural advisor powered by Google Gemini generative AI.
+- Multi-turn advice for crop disease symptoms, soil nutrient management, and pesticide dosages.
+- Autonomous offline knowledge fallback ensuring 100% uptime even without external AI keys.
 
-#### Q7: "How is security and authentication handled?"
-> **Answer**:  
-> "User passwords are encrypted before database insertion using **`bcryptjs`** with 10 salt rounds. Upon login, the server signs a stateless **JSON Web Token (JWT)** containing the user's `id` and `role`. Protected endpoints check this token via an Express authorization middleware (`Bearer <token>`)."
+---
 
-#### Q8: "How does the Farmer-Buyer Matching algorithm work?"
-> **Answer**:  
-> "When a farmer lists a crop or navigates to the marketplace, the backend runs a multi-criteria scoring algorithm (`matchController.js`). It matches:
-> 1. Commodity compatibility (exact and normalized name match).
-> 2. Quantity sufficiency (farmer supply vs buyer demand volume).
-> 3. Price spread (buyer offered price $\ge$ farmer expected price).
-> 4. Geographical proximity (matching state and district)."
+## ⚙️ 8. Environment Variables & Configuration
 
-#### Q9: "How does the weather module provide agricultural advisories?"
-> **Answer**:  
-> "Rather than just displaying temperatures, our backend evaluates agricultural thresholds:
-> - If past 14-day rain exceeds 60mm or rain probability is $>60\%$, it triggers **'Hold Irrigation'** to prevent root rot.
-> - If humidity $>75\%$ and temperature is between 24°C–32°C, it triggers a **'High Fungal & Bollworm Risk'** alert.
-> - If wind speed exceeds 15 km/h, it issues a **'Postpone Chemical Foliar Spray'** warning."
+Create a `.env` file inside the `server/` directory using the provided `.env.example`:
 
-#### Q10: "What is Vite and why did you use it instead of Create React App?"
-> **Answer**:  
-> "Create React App (CRA) is deprecated and relies on Webpack, which takes significant time to bundle. **Vite** leverages native ES Modules (ESM) in modern browsers and uses esbuild (written in Go), providing instant server start and lightning-fast Hot Module Replacement (HMR)."
+```bash
+# Server Port
+PORT=5000
 
-#### Q11: "What role does Recharts play in the frontend?"
-> **Answer**:  
-> "Recharts is a composable React charting library built on SVG elements. We use it to render responsive, interactive **AreaCharts**, **BarCharts**, and **LineCharts** showing historical APMC prices, arrival volume bars, and 7/15/30-day forecast curves with custom tooltips."
+# Security (JWT secret for session tokens)
+JWT_SECRET=your_super_secret_jwt_key_here
 
-#### Q12: "How do you handle different user roles in the system?"
-> **Answer**:  
-> "The system supports four distinct roles (`farmer`, `buyer`, `transporter`, `admin`). The role is saved in the `users` table and encoded inside the JWT payload. The frontend conditionally renders navigation links and dashboard action cards based on this role, and the backend routes enforce permission checks."
+# Google Gemini API Key (Optional: for live generative AI assistant)
+GEMINI_API_KEY=your_gemini_api_key_here
 
-#### Q13: "What happens when a farmer books a tractor or warehouse?"
-> **Answer**:  
-> "A record is inserted into the `bookings` table with status `'Upcoming'`, linking the `user_id`, item details, duration, and calculated cost. The respective equipment or warehouse's available capacity is updated transactionally."
+# Open Government Data (data.gov.in) API Key (Optional)
+DATA_GOV_IN_API_KEY=your_government_portal_api_key_here
+```
 
-#### Q14: "Can you show where the Gemini API is called in the code?"
-> **Answer**:  
-> "Yes, in `server/services/geminiService.js`. The `getClient()` function initializes the `GoogleGenerativeAI` instance with the configured API key, and calls `generateContentWithFallback()` targeting models `gemini-1.5-flash` or `gemini-2.0-flash` with a 35-second timeout safeguard."
+> **Note**: AgriPulse is built to be fully functional out-of-the-box. If external API keys are omitted, the platform gracefully switches to built-in simulation and local knowledge bases.
 
-#### Q15: "What are the future enhancements for this project?"
-> **Answer**:  
-> "1. Integrating IoT soil moisture sensors directly via MQTT protocol.  
-> 2. Adding voice-based vernacular input in regional languages (Marathi, Hindi) using Web Speech API.  
-> 3. Integrating UPI payment gateway for digital equipment rental escrow."
+---
+
+## 🗺️ 9. Future Roadmap & Enhancements
+
+- [ ] **IoT Sensor Integration**: Real-time soil moisture and NPK sensor telemetry over MQTT.
+- [ ] **Vernacular Voice Interface**: Speech-to-text queries in Marathi, Hindi, and Telugu.
+- [ ] **UPI Escrow Payment Gateway**: Secure digital advance payment for equipment rentals and produce transactions.
+- [ ] **Satellite NDVI Health Indices**: Remote sensing crop health analysis through Sentinel/Copernicus satellite imagery.
 
 ---
 
