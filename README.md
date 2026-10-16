@@ -1,6 +1,14 @@
 # 🌾 AgriPulse — Smart Crop Forecasting, Agricultural Intelligence & Supply-Chain Platform
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Agripulse--Ai-181717?style=for-the-badge&logo=github)](https://github.com/workamanjadhao-dev/Agripulse-Ai)
+[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.0.7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E=18.0-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+
 > **Final Year Project (Capstone / B.Tech / B.E. / MCA)**  
+> **Official Repository**: [https://github.com/workamanjadhao-dev/Agripulse-Ai](https://github.com/workamanjadhao-dev/Agripulse-Ai)  
 > **Comprehensive System Documentation & Viva-Defense Reference Manual**
 
 ---
@@ -228,11 +236,18 @@ $$\text{Forecast Price} = P_{\text{current}} \times (1 + \Delta_{\text{trend}} +
 
 ---
 
-## 🚀 6. Step-by-Step Instructions to Run the Project for Viva
+## 🚀 6. Step-by-Step Instructions to Run the Project for Viva / Evaluation
 
 ### Prerequisites
-- **Node.js** (v18.0.0 or higher) installed on the machine.
-- Web browser (Google Chrome, Microsoft Edge, or Brave).
+- **Git** installed on the system
+- **Node.js** (`>= v18.0.0`) installed on the machine
+- Web browser (Google Chrome, Microsoft Edge, or Brave)
+
+### Step 0: Clone the Repository
+```bash
+git clone https://github.com/workamanjadhao-dev/Agripulse-Ai.git
+cd Agripulse-Ai
+```
 
 ### Step 1: Start the Backend Server
 Open Terminal 1:
@@ -343,7 +358,11 @@ Navigate to `http://localhost:5173`.
 
 ---
 
-## 👨‍💻 Project Contributors
-- **Final Year Engineering / Computer Science Department**
+## 👨‍💻 Project Author & Contributors
+- **Lead Developer**: **Aman Jadhao** ([@workamanjadhao-dev](https://github.com/workamanjadhao-dev))
+- **Contact / Email**: [work.amanjadhao@gmail.com](mailto:work.amanjadhao@gmail.com)
+- **Repository**: [https://github.com/workamanjadhao-dev/Agripulse-Ai](https://github.com/workamanjadhao-dev/Agripulse-Ai)
+- **Academic Department**: Final Year Engineering / Computer Science Department
 - **Project Academic Year**: 2025 – 2026
-- **Status**: Tested, Functional & Ready for Evaluation
+- **Status**: Tested, Functional & Ready for Evaluation / Deployment
+
