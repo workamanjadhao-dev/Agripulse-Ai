@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Key, Sparkles, X, CheckCircle2, ShieldCheck, AlertCircle } from 'lucide-react';
+import { API_BASE_URL } from '../api/client';
 
 export const ApiKeyModal = ({ isOpen, onClose }) => {
   const { showToast } = useApp();
@@ -13,7 +14,7 @@ export const ApiKeyModal = ({ isOpen, onClose }) => {
     setApiKey(saved);
 
     // Check backend health status
-    fetch('http://localhost:5000/api/health')
+    fetch(`${API_BASE_URL}/health`)
       .then(r => r.json())
       .then(data => {
         if (data.geminiApiKeyConfigured || saved) {

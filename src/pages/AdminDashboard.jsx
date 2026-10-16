@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../api/client';
+import { api, API_BASE_URL } from '../api/client';
 import { useApp } from '../context/AppContext';
 import { 
   ShieldCheck, Users, Store, Tractor, Truck, BrainCircuit, Activity, 
@@ -39,7 +39,7 @@ export const AdminDashboard = () => {
       const params = {};
       if (userRoleFilter !== 'All') params.role = userRoleFilter;
       if (userSearch) params.search = userSearch;
-      const res = await fetch(`http://localhost:5000/api/admin/users?${new URLSearchParams(params)}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/users?${new URLSearchParams(params)}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('agri_jwt_token')}` }
       });
       const data = await res.json();
@@ -51,7 +51,7 @@ export const AdminDashboard = () => {
 
   const fetchAdminCrops = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/crops', {
+      const res = await fetch(`${API_BASE_URL}/admin/crops`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('agri_jwt_token')}` }
       });
       const data = await res.json();
@@ -65,7 +65,7 @@ export const AdminDashboard = () => {
     if (!window.confirm(`Delete user "${userName}"? This action cannot be undone.`)) return;
     setDeletingId(userId);
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/users/${userId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('agri_jwt_token')}` }
       });
@@ -86,7 +86,7 @@ export const AdminDashboard = () => {
 
   const handleForceSync = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/market-data/sync', {
+      const res = await fetch(`${API_BASE_URL}/admin/market-data/sync`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('agri_jwt_token')}` }
       });
